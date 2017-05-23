@@ -3,7 +3,7 @@
 
 	This modification is to migrate the Parakeet project to support low cost 
 	connectivity solutions like hologram.io.  The goal is to use dasboard solutions in 
-	hologram.io to initially control and conofigure the Parakeet, and to have the 
+	hologram.io to initially control and configure the Parakeet, and to have the 
 	Parakeet use a MQTT compliant server such as Mosquitto to publish data and to receive 
 	subsequent configuration commands.
 		-mbc1855

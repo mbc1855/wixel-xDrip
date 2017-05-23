@@ -1,17 +1,23 @@
 /** XDRIP GSM Bridge:
     Project Parakeet
 
+	This modification is to migrate the Parakeet project to support low cost 
+	connectivity solutions like hologram.io.  The goal is to use dasboard solutions in 
+	hologram.io to initially control and conofigure the Parakeet, and to have the 
+	Parakeet use a MQTT compliant server such as Mosquitto to publish data and to receive 
+	subsequent configuration commands.
+		-mbc1855
+
+
   == Description ==
   The app uses the radio_queue libray to receive packets.  It does not
   transmit any packets.
 
-  Received packets are forwarded via a SIM800 GSM modem to a remote udp or web service.
+  Received packets are forwarded via a SIM800 GSM modem to a MQTT server.
 
   This allows for reception in to xDrip remotely using GPRS wide area networking
 
   UDP payload size is only 8 bytes for basic mode or 16 bytes when including geo location.
-
-  Falls back to HTTP mode if UDP fails.
 
   GSM modem facilities added by jamorham
 
@@ -27,6 +33,8 @@
   bm = battery millivolts
   ct = cpu temperature, eg 287 = 28.7c
   gl = geo location longitude/latitude
+
+	The above will be formatted into a JSON string to function with MQTT
 
   populate the defines or my_transmitter_id.h file with your local web service
   gprs apn etc
@@ -94,6 +102,7 @@ radio_channel: See description in radio_link.h.
 #include <ctype.h>
 #include <adc.h>
 #include <limits.h>
+#include <MQTTClient.h>
 
 /* Function prototypes ********************************************************/
 
